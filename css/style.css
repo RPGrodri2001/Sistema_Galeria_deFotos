@@ -120,7 +120,8 @@ body {
     opacity: 0;
     transform: scale(1.1);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    cursor: pointer !important;
+    z-index: 1;
 }
 
 .slide.active {
@@ -132,36 +133,54 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
+    pointer-events: auto !important;
+    display: block !important;
 }
 
 .slide img:hover {
-    transform: scale(1.02);
-    filter: brightness(1.05);
+    transform: scale(1.03);
+    filter: brightness(1.1) saturate(1.1);
 }
 
 /* Indicador visual para clic */
 .slide::after {
-    content: '🔍 Clic para ampliar';
+    content: '🖱️ CLICK PARA VER COMPLETA';
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
-    padding: 8px 15px;
-    border-radius: 25px;
-    font-size: 0.9rem;
+    padding: 20px 30px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     pointer-events: none;
-    z-index: 5;
-    font-weight: 500;
+    z-index: 15;
+    text-align: center;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .slide:hover::after {
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.slide:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.2) saturate(1.1);
+    box-shadow: 0 0 80px rgba(255, 255, 255, 0.9);
+}
+
+.slide:hover {
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.6);
 }
 
 /* Overlay de información */
@@ -373,11 +392,13 @@ body {
     z-index: 9999;
     opacity: 0;
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    pointer-events: none;
 }
 
 .fullscreen-modal.show {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .fullscreen-content {
@@ -391,11 +412,11 @@ body {
 }
 
 .fullscreen-image {
-    max-width: 95vw;
-    max-height: 85vh;
+    max-width: 90vw;
+    max-height: 80vh;
     object-fit: contain;
     border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
     transform: scale(0.9);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -407,13 +428,13 @@ body {
     opacity: 1;
 }
 
-/* Botones de navegación en pantalla completa */
+/* Botones de navegación en pantalla completa CORREGIDOS */
 .fullscreen-close {
     position: absolute;
     top: 30px;
     right: 30px;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid rgba(255, 0, 0, 0.4);
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -421,26 +442,28 @@ body {
     color: #333;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10000;
+    z-index: 10001;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
 }
 
 .fullscreen-close:hover {
     background: #ff4757;
     color: white;
-    transform: scale(1.1);
-    box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
+    border-color: #ff4757;
+    transform: scale(1.25);
+    box-shadow: 0 15px 50px rgba(255, 71, 87, 0.8);
 }
 
 .fullscreen-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid rgba(102, 126, 234, 0.4);
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -452,14 +475,16 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    z-index: 10000;
+    z-index: 10001;
+    pointer-events: auto;
 }
 
 .fullscreen-nav:hover {
     background: #667eea;
     color: white;
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 10px 35px rgba(102, 126, 234, 0.4);
+    border-color: #667eea;
+    transform: translateY(-50%) scale(1.3);
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.8);
 }
 
 .fullscreen-prev {
@@ -476,15 +501,15 @@ body {
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 20px 30px;
     border-radius: 30px;
     text-align: center;
     backdrop-filter: blur(10px);
     max-width: 80%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.8);
 }
 
 .fullscreen-info h4 {
@@ -607,9 +632,9 @@ body {
     }
 
     .slide::after {
-        content: '👆 Toca para ampliar';
-        font-size: 0.8rem;
-        padding: 6px 12px;
+        content: '👆 TOCA PARA VER COMPLETA';
+        font-size: 1rem;
+        padding: 15px 25px;
     }
 
     /* Pantalla completa en móvil */
@@ -620,14 +645,14 @@ body {
     .fullscreen-close {
         top: 20px;
         right: 20px;
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         font-size: 1.3rem;
     }
 
     .fullscreen-nav {
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
         font-size: 1.3rem;
     }
 
@@ -654,8 +679,8 @@ body {
     }
 
     .fullscreen-image {
-        max-width: 98vw;
-        max-height: 80vh;
+        max-width: 95vw;
+        max-height: 75vh;
     }
 }
 
@@ -697,14 +722,14 @@ body {
     .fullscreen-close {
         top: 15px;
         right: 15px;
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         font-size: 1.2rem;
     }
 
     .fullscreen-nav {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         font-size: 1.2rem;
     }
 
@@ -717,15 +742,14 @@ body {
     }
 
     .slide::after {
-        top: 15px;
-        right: 15px;
-        font-size: 0.7rem;
-        padding: 4px 8px;
+        content: '👆 TOCA';
+        font-size: 0.9rem;
+        padding: 12px 20px;
     }
 
     .fullscreen-image {
-        max-width: 95vw;
-        max-height: 75vh;
+        max-width: 98vw;
+        max-height: 70vh;
     }
 }
 
@@ -745,11 +769,6 @@ body {
     animation: imageZoom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Efecto de resplandor al hacer hover */
-.slide:hover {
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-}
-
 /* Prevenir selección de texto en elementos interactivos */
 .fullscreen-modal * {
     user-select: none;
@@ -758,7 +777,51 @@ body {
     -ms-user-select: none;
 }
 
+/* Permitir selección en textos específicos */
+.slide-title,
+.slide-description,
+.fullscreen-info h4,
+.fullscreen-info p {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
 /* Scroll suave cuando se cierra el modal */
 html {
     scroll-behavior: smooth;
+}
+
+/* Optimizaciones de rendimiento */
+.slide {
+    will-change: transform, opacity;
+}
+
+.fullscreen-modal {
+    will-change: opacity, transform;
+}
+
+.fullscreen-image {
+    will-change: opacity, transform;
+}
+
+/* Prevenir parpadeo en transiciones */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* Prevenir conflictos de eventos */
+.slide * {
+    pointer-events: none;
+}
+
+.slide img {
+    pointer-events: auto !important;
+}
+
+.fullscreen-modal.show .fullscreen-close,
+.fullscreen-modal.show .fullscreen-nav {
+    pointer-events: auto !important;
 }
