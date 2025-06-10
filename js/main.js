@@ -57,9 +57,7 @@ class ElegantCarousel {
             { src: './Alli/foto7.jpeg', title: 'Regalos del Corazón', description: 'Eres el mejor regalo de mi vida 🎁' },
             { src: './Alli/foto8.jpeg', title: 'Promesas Eternas', description: 'Mi corazón es tuyo para siempre 💍' },
             { src: './Alli/foto9.jpeg', title: 'Amor Infinito', description: 'Nuestro amor no tiene límites ∞' },
-            { src: './Alli/foto10.jpeg', title: 'Mi Reina', description: 'Eres la reina de mi corazón 👑' },
-            { src: './Alli/foto11.jpeg', title: 'Mi cuchi', description: 'Eres la reina de mi corazón 👑' },
-            { src: './Alli/foto12.jpeg', title: 'Mi niña', description: 'Eres la reina de mi corazón 👑' }
+            { src: './Alli/foto10.jpeg', title: 'Mi Reina', description: 'Eres la reina de mi corazón 👑' }
         ];
         
         console.log('✅ Elementos inicializados');
